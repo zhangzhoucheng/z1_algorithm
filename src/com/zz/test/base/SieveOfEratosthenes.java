@@ -40,7 +40,7 @@ public class SieveOfEratosthenes {
 			 * 2、每个item while 
 			 */
 		Long start = System.currentTimeMillis();
-		SieveOfEratosthenes.getSieveOfErat(0, 200000000);//.forEach(System.out::println);;
+		SieveOfEratosthenes.getSieveOfErat(0, 200_0000);//.forEach(System.out::println);;
 		Long end = System.currentTimeMillis();
 		
 		System.out.println("time:" + (end-start));
@@ -63,7 +63,7 @@ public class SieveOfEratosthenes {
 			slot.set(i);
 		}
 		
-		//循环1/2即可
+		//循环1/2即可（为啥是小于平方根A：因为当i*j如果被clear，当i>A,而且二者乘积i*j<testSum,发现之前i=j的时候，也穷举了该情况，所以i*i < testNum即可
 		for(int i = (start<2 ? 2 : start); i*i < testNum; i ++){
 			if(!slot.get(i)) continue;
 			int muti = i;
