@@ -192,5 +192,64 @@ public class MaxCommonSubOrder {
 				System.out.print(strb_sub_local.get(i3)+",");
 			}
 			
+			
+			
 		}
+		
+		
+		private String getLinesPreByStr(String str, BitSet strBitSet) {
+			final String contentExtend = "<div class=\"CodeMirror-code\">%s</<div>";
+			final String content ="";
+			final String line = "<pre class=\"codem_pre\" style=\"%s\">%s</pre>";//行模式
+			final String charOfLine = "%s";
+			final String charRed = "<span style=\"color:red\">%s</span>";
+			
+			//默认行颜色
+			String colorDefault = "";
+			String lineBackgroundColor = "background-color:#D7D4F0;";//灰色
+			String lineColorRed = "color:red;";
+			
+			String [] strLines = str.split("\\n");//分割
+			int charCount = 0;//记录下列字符遍历的位置。注意处理当\n 时非的之后
+			
+			for(int i=0; i<strLines.length; i++) {
+				String lineTemp = "";//临时行内容
+				boolean lineColorRedFlag = false; //行标红标记
+				String unCommon = "";
+				String lineBackgroundColorTemp = "";
+				for(int j=0; j<strLines[i].length(); j++) {
+					
+					if(!strBitSet.get(j)) {//非公共需要加起来
+						unCommon += strLines[i].charAt(j);
+					}else {//公共的正常累加，
+						if(!"".equals(unCommon)) {//上次非公共的不为空，则需要处理上次非公共的。且把非公共处理成空
+							lineTemp += (String.format(charRed, unCommon));
+							unCommon = "";
+							lineColorRedFlag = true;
+						}
+						lineTemp += strLines[i].charAt(j);
+					}
+					
+					charCount ++;
+				}
+				charCount ++;//加上换行符
+				
+				if(!strBitSet.get(charCount)) {//当换行符位置有不同，则其前后行都应该标红
+					lineColorRedFlag = true;
+				}
+				
+				
+				if(lineColorRedFlag) {//如果行有非同，则进行标记
+					lineBackgroundColorTemp = lineBackgroundColor;
+				}
+				String.format(line, lineBackgroundColorTemp,)
+				
+			}
+			
+			return null;
+		}
+		
+		private static final String PRE_TEXT="<pre>"
+				+ "%s"
+				+ "</pre>";
 }
