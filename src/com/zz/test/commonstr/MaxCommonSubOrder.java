@@ -2,6 +2,7 @@ package com.zz.test.commonstr;
 
 import java.util.ArrayList;
 import java.util.BitSet;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,16 +48,111 @@ public class MaxCommonSubOrder {
 	public static void main(String[] args) {
 		//String a = "cnblogs";
 		//String b = "belong";
-		String a = "cnblogsu7k9j00l";
-		String b = "belong231u144k555j4444l";
-		MaxCommonSubOrder mcso = new MaxCommonSubOrder(a, b);
+		//String a = "cnblogsu7k9j00l";
+		//String b = "belong231u144k555j4444l";
+		//MaxCommonSubOrder mcso = new MaxCommonSubOrder(a, b);
 		
 		
 		//System.out.println(mcso.getMCSO(a.length() - 1, b.length() - 1));
 		
 		//System.out.println(mcso.getMCSO_d());
 		
-		mcso.getMCSO_str_d();
+		//mcso.getMCSO_str_d();
+		
+		
+		//test
+		
+		String a="/*以下为演示内容，请添加您自己的内容 ~_~ */\r\n"
+				+ "\r\n"
+				+ "html,\r\n"
+				+ "body {\r\n"
+				+ "  width: 100%;\r\n"
+				+ "  height: 100%;\r\n"
+				+ "  margin: 0;\r\n"
+				+ "  padding: 0;\r\n"
+				+ "  overflow: hidden;\r\n"
+				+ "  font-family: 'Fira Mono', helvetica, arial, sans-serif;\r\n"
+				+ "  font-weight: 400;\r\n"
+				+ "  font-size: 62.5%;\r\n"
+				+ "}\r\n"
+				+ "\r\n"
+				+ "#webgl-container {\r\n"
+				+ "  width: 100%;\r\n"
+				+ "  height: 100%;\r\n"
+				+ "  cursor: pointer;\r\n"
+				+ "}\r\n"
+				+ "\r\n"
+				+ ".loading {\r\n"
+				+ "  position: absolute;\r\n"
+				+ "  width: 100%;\r\n"
+				+ "  height: 100%;\r\n"
+				+ "  background-color: #000000;\r\n"
+				+ "  opacity: 1;\r\n"
+				+ "  -webkit-transition: opacity 1.2s ease-out;\r\n"
+				+ "  -o-transition: opacity 1.2s ease-out;\r\n"
+				+ "  transition: opacity 1.2s ease-out;\r\n"
+				+ "  pointer-events: none;\r\n"
+				+ "  z-index: 5;\r\n"
+				+ "}\r\n"
+				+ "\r\n"
+				+ ".loading__progress {\r\n"
+				+ "  position: absolute;\r\n"
+				+ "  top: 50%;\r\n"
+				+ "  left: 50%;\r\n"
+				+ "  transform: translate(-50%, -50%);\r\n"
+				+ "  text-align: center;\r\n"
+				+ "  -webkit-transition: opacity 0.25s ease-out;\r\n"
+				+ "  -o-transition: opacity 0.25s ease-out;\r\n"
+				+ "  transition: opacity 0.25s ease-out;\r\n"
+				+ "  opacity: 0;\r\n"
+				+ "}";
+		
+		String b="/*以下为演示内容，请添加您自己的内容 ^_^ */\r\n"
+				+ "\r\n"
+				+ "html,\r\n"
+				+ "body {\r\n"
+				+ "  width: 100%;\r\n"
+				+ "  height: 100%;\r\n"
+				+ "  margin: 0;\r\n"
+				+ "  padding: 1;\r\n"
+				+ "  overflow: hiddean;\r\n"
+				+ "  font-family: 'Fira Mono', helvetica, arial, sans-serif;\r\n"
+				+ "  font-weight: 400;\r\n"
+				+ "  font-size: 62.0%;\r\n"
+				+ "}\r\n"
+				+ "\r\n"
+				+ "#webgl-container {\r\n"
+				+ "  width: 100%;\r\n"
+				+ "  height: 100%;\r\n"
+				+ "  cursor: pointer;\r\n"
+				+ "}\r\n"
+				+ "\r\n"
+				+ ".loading {\r\n"
+				+ "  position: absolute;\r\n"
+				+ "  width: 100%;\r\n"
+				+ "  height: 100%;\r\n"
+				+ "  background-color: #0000fff;\r\n"
+				+ "  opacity: 1;\r\n"
+				+ "  -webkit-transition: opacity 1.2s ease-out;\r\n"
+				+ "  -o-transition: opacity 1.2s ease-out;\r\n"
+				+ "  transition: opacity 1.2s ease-out;\r\n"
+				+ "  pointer-events: none;\r\n"
+				+ "  z-index: 5;\r\n"
+				+ "}\r\n"
+				+ "\r\n"
+				+ ".loading__progress {\r\n"
+				+ "  position: absolute;\r\n"
+				+ "  top: 80%;\r\n"
+				+ "  left: 50%;\r\n"
+				+ "  transform: translate(-50%, -50%);\r\n"
+				+ "  text-align: center;\r\n"
+				+ "  -webkit-transition: opacity 0.25s ease-out;\r\n"
+				+ "  -o-transition: opacity 0.25s ease-out;\r\n"
+				+ "  transition: opacity 0.25s ease-out;\r\n"
+				+ "  opacity: 0;\r\n"
+				+ "}";
+		
+		MaxCommonSubOrder.getCompareResultHtml(a, b);
 	}
 	
 	
@@ -196,10 +292,30 @@ public class MaxCommonSubOrder {
 			
 		}
 		
+		/**
+		 * 獲取html 格式返回比對結果
+		 * @param stra
+		 * @param strb
+		 * @return
+		 */
+		public static Map<String, String> getCompareResultHtml(String stra, String strb) {
+			MaxCommonSubOrder mcso = new MaxCommonSubOrder(stra, strb);
+			mcso.getMCSO_str_d();
+			Map<String, String> map = new HashMap<>();
+			String a =  mcso.getLinesPreByStr(stra, mcso.stra_sub_local);
+			String b = mcso.getLinesPreByStr(strb, mcso.strb_sub_local);
+			map.put("compareA", a);
+			map.put("compareB", b);
+			System.out.println("@@@@@@@@@@@@:");
+			System.out.println(a);
+			System.out.println("@@@@@@@@@@@@1:");
+			System.out.println(b);
+			return map;
+		}
 		
 		private String getLinesPreByStr(String str, BitSet strBitSet) {
 			final String contentExtend = "<div class=\"CodeMirror-code\">%s</<div>";
-			final String content ="";
+			 String content ="";
 			final String line = "<pre class=\"codem_pre\" style=\"%s\">%s</pre>";//行模式
 			final String charOfLine = "%s";
 			final String charRed = "<span style=\"color:red\">%s</span>";
@@ -212,14 +328,18 @@ public class MaxCommonSubOrder {
 			String [] strLines = str.split("\\n");//分割
 			int charCount = 0;//记录下列字符遍历的位置。注意处理当\n 时非的之后
 			
+			
+			boolean linexColorRedFlagNext = false;//下一行標紅標記
 			for(int i=0; i<strLines.length; i++) {
 				String lineTemp = "";//临时行内容
+				
 				boolean lineColorRedFlag = false; //行标红标记
+				
 				String unCommon = "";
 				String lineBackgroundColorTemp = "";
 				for(int j=0; j<strLines[i].length(); j++) {
 					
-					if(!strBitSet.get(j)) {//非公共需要加起来
+					if(!strBitSet.get(charCount)) {//非公共需要加起来
 						unCommon += strLines[i].charAt(j);
 					}else {//公共的正常累加，
 						if(!"".equals(unCommon)) {//上次非公共的不为空，则需要处理上次非公共的。且把非公共处理成空
@@ -234,19 +354,24 @@ public class MaxCommonSubOrder {
 				}
 				charCount ++;//加上换行符
 				
+				
+				if(linexColorRedFlagNext) {
+					lineColorRedFlag = true;
+					linexColorRedFlagNext = false;
+				}
 				if(!strBitSet.get(charCount)) {//当换行符位置有不同，则其前后行都应该标红
 					lineColorRedFlag = true;
+					linexColorRedFlagNext = true;
 				}
-				
 				
 				if(lineColorRedFlag) {//如果行有非同，则进行标记
 					lineBackgroundColorTemp = lineBackgroundColor;
 				}
-				String.format(line, lineBackgroundColorTemp,)
+				content += String.format(line, lineBackgroundColorTemp,lineTemp);
 				
 			}
 			
-			return null;
+			return String.format(contentExtend, content);
 		}
 		
 		private static final String PRE_TEXT="<pre>"
